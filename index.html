@@ -1,0 +1,131 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <style>
+#container{ flex: 1 0 auto;}  
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+fieldset{border:1px solid #293E6B;padding: 10px;border-radius: 7px;}
+.lhist{height:20px;font-size: 10px;padding: 2px;width:30px;}
+.table td{padding: .50rem}
+#loader {
+display:none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 90px;
+  height: 90px;
+  margin: -45px 0 0 -45px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 90px;
+  height: 90px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+  </style>
+  <script>
+   //***********************************
+//GRABAR REGISTRO
+var url = 'https://script.google.com/macros/s/AKfycbxiSxUcsQ610a0ahmywbA8psj91VwiItYTL0R-64xs4d0mo79zBC8NX/exec';
+		
+function grabar(){
+  
+  var ahora=new Date();
+  var gid=$("#txtb").val();
+  var fec=gfecha()+"_"+ghora()
+  
+    
+  var jqxhr = $.ajax({
+    url: url,
+    method: "POST",
+    dataType: "json",
+    data: {"DNI":gid,"FECHOR":fec},
+	success: function (msg) {if(msg.row>0){alert("listo")}}})
+
+}
+function gfecha(){
+	var dac = new Date()
+	var dia = ('0' + dac.getDate()).slice(-2);var mes = ('0' + (dac.getMonth()+1)).slice(-2);var ano=dac.getFullYear()
+	var conc=dia+"/"+mes+"/"+ano
+	return conc
+}
+function ghora(){
+	var dac1 = new Date()
+	var hr = ('0' + dac1.getHours()).slice(-2);var mn = ('0' + (dac1.getMinutes())).slice(-2)
+	var conc=hr+":"+mn
+	return conc
+}
+  </script>
+</head>
+<body>
+<div class="text-center h-10" style="margin-bottom:0;background-color:#293E6B;width:100%">
+<img src="css/images/logo.png" style="height:50px;"/>
+</div>
+<div id="1" style="display:block;justify-content: center;align-items: center;height:300px;width:100%">
+
+<div style="position: absolute;left: 50%;margin-left: -18%;margin-top:20px;"><h2>Muchas Gracias por Participar</h2></div>
+<div style="position: absolute;left: 50%;margin-left: -26%;margin-top:70px;"> <h5>Por favor, Para finalizar el curso , ingresar tu Nro de DNI y hace clic en finalizar</h5></div>
+
+ <div class="input-group mb-3" style="left: 50%;margin-left: -13%;top:110px;width: 350px;">
+ <div class="input-group-prepend">
+	<span class="input-group-text">Dni&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span>
+ </div>
+<div><input id="txtb"  class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "8" style="width:200px;text-align:center;height:40px;font-size:25px;color:#293E6B;font-weight:bold;"/></div>
+
+</div>
+<div style="left: 50%;position: relative;margin-left: -10%;top: 115px;width: 350px;">
+<button id="bt1" class="btn btn-primary" style="width:230px" onclick="grabar()">Finalizar</button>
+</div>
+</div>
+ <footer id="footer" class="py-2 bg-dark text-white-50 ">
+    <div class="container text-center">
+      <small>Copyright &copy; Atento | 2021</small>
+    </div>
+  </footer>
+</body>
+</html>
