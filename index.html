@@ -72,6 +72,23 @@ input[type=number]::-webkit-outer-spin-button {
    //***********************************
 //GRABAR REGISTRO
 var url = 'https://script.google.com/macros/s/AKfycbxiSxUcsQ610a0ahmywbA8psj91VwiItYTL0R-64xs4d0mo79zBC8NX/exec';
+
+
+$( document ).ready(function() {
+	var sss= getParentUrl
+    alert(sss)
+});		
+		
+function getParentUrl() {
+    var isInIframe = (parent !== window),
+        parentUrl = null;
+
+    if (isInIframe) {
+        parentUrl = document.referrer;
+    }
+
+    return parentUrl;
+}
 		
 function grabar(){
   
